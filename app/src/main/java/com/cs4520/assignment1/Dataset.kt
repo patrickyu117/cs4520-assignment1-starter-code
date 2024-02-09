@@ -38,3 +38,26 @@ val productsDataset = listOf(
     listOf("Gymnastic Rings", "Equipment", null, 50),
     listOf("Blackberry", "Food", "2024-05-08", 29),
 )
+
+//fun convertProduct(productData: List<String>): Product {
+//    val (name, type, expiryDate, priceString) = productData
+//    val price = Integer.parseInt(priceString)
+//    return when (type) {
+//        "Food" -> Product.Food(name, type, expiryDate, price)
+//        "Equipment" -> Product.Equipment(name, type, expiryDate, price)
+//        else -> throw IllegalArgumentException("Invalid product type")
+//    }
+//}
+//
+//val productList = productsDataset.filterIsInstance<List<String>>().map { convertProduct(it) }
+fun convertProducts(productsDataset: List<List<Any?>>): List<Product> {
+    val convertedProducts = mutableListOf<Product>()
+    for (productData in productsDataset) {
+        val (name, type, expiryDate, price) = productData
+        when (type) {
+            "Food" -> convertedProducts.add(Product.Food(name.toString(), type.toString(), expiryDate.toString(), Integer.valueOf(price.toString())))
+            "Equipment" -> convertedProducts.add(Product.Equipment(name.toString(), type.toString(), expiryDate.toString(), Integer.valueOf(price.toString())))
+        }
+    }
+    return convertedProducts.toList()
+}
