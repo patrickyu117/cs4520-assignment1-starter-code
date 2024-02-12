@@ -17,3 +17,15 @@ sealed class Product(val name: String, val type: String, val expiryDate: String?
     ) : Product(equipName, productType, equipExpiry, equipPrice)
 }
 
+fun convertProducts(productsDataset: List<List<Any?>>): List<Product> {
+    val convertedProducts = mutableListOf<Product>()
+    for (productData in productsDataset) {
+        val (name, type, expiryDate, price) = productData
+        when (type) {
+            "Food" -> convertedProducts.add(Product.Food(name.toString(), type.toString(), expiryDate.toString(), Integer.valueOf(price.toString())))
+            "Equipment" -> convertedProducts.add(Product.Equipment(name.toString(), type.toString(), expiryDate.toString(), Integer.valueOf(price.toString())))
+        }
+    }
+    return convertedProducts.toList()
+}
+
