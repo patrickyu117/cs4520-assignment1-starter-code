@@ -13,28 +13,29 @@ import com.cs4520.assignment1.databinding.FragmentLoginBinding
 // The NavController switches between the fragments based off of the nav graph
 class LoginFragment : Fragment() {
 
+    // Creates the binding object
     private lateinit var binding: FragmentLoginBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // inflates the view
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        // Setting the on click listener for the login button
         binding.loginButton.setOnClickListener {
             // Grabs the username and password from the text boxes
             val username = binding.usernameText.text.toString()
             val password = binding.passwordText.text.toString()
             // Checks if the username and password are correct
             if (username == "admin" && password == "admin") {
+                // Display success login message
                 Toast.makeText(requireContext(), "Login successful", Toast.LENGTH_SHORT).show()
-                // WHAT IS THE DIFFERENCE BETWEEN NAVIGATION AND FINDNAVCONTROLLER
-                val navController = Navigation.findNavController(view)
                 findNavController().navigate(R.id.action_loginFragment_to_productListFragment)
                 // Clear the username and password after logging in
                 binding.usernameText.text.clear()

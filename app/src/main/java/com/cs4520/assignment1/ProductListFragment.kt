@@ -10,31 +10,29 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.cs4520.assignment1.databinding.FragmentProductListBinding
 
+// Fragment class for the product list
 class ProductListFragment() : Fragment() {
     private lateinit var binding: FragmentProductListBinding
-    private var layoutManager : LayoutManager? = null
-    private var adapter : RecyclerView.Adapter<ProductListAdapter.ViewHolder>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // inflate the product list
         binding = FragmentProductListBinding.inflate(layoutInflater, container, false)
-//        val productList = productsDataset.filterIsInstance<List<String>>().map { convertProduct(it) }
-//        layoutManager = LinearLayoutManager(requireContext())
-//        binding.recyclerView.layoutManager = layoutManager
-//        adapter = ProductListAdapter(productList)
-//        binding.recyclerView.adapter = adapter
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // Convert the list given to a list of Products
         val convertedList = convertProducts(productsDataset)
-
+        // Pass the converted list to the product list adapter
         val itemAdapter = ProductListAdapter(convertedList)
+        // Use recycler view for the layout manager
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
+        // User recycler view for the adapter and set it to our product list adapter
         binding.recyclerView.adapter = itemAdapter
     }
 }
